@@ -37,6 +37,7 @@
             height: 100vh;
             width: 100vw;
             max-width: 100%; /* Because the scrollbar's width is included in 100vw -.- */
+            scroll-snap-type: y proximity;
         }
 
         body {
@@ -86,6 +87,7 @@
             width: 100vw;
             max-width: 100%; /* Because the scrollbar's width is included in 100vw -.- */
             padding: 5rem 10rem;
+            scroll-snap-align: start;
         }
 
         section:not(#top) {
