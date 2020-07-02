@@ -7,41 +7,145 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
     <style lang="css">
-        @import url('https://fonts.googleapis.com/css?family=Sarpanch:900');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Sarpanch:wght@900&display=swap');
+        :root {
+            --red: #d53a33;
+            --blue: #1d9099;
+            --yellow: #e79c10;
+        }
+
+        ::selection {
+            color: #efefef;
+            background: var(--blue);
+        }
+
+        ::-moz-selection {
+            color: #efefef;
+            background: var(--blue);
+        }
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
         html, body {
             margin: 0;
             padding: 0;
+            height: 100vh;
+            width: 100vw;
+            max-width: 100%; /* Because the scrollbar's width is included in 100vw -.- */
         }
 
         body {
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            overflow: hidden;
-            background-image: radial-gradient(circle, #333333, #222222)
+            color: #efefef;
+            font-family: 'Montserrat', sans-serif;
+            background-image: radial-gradient(circle, #333333, #222222);
+            background-size: 100vw 100vh;
+            background-attachment: fixed;
         }
 
-        img {
+        a {
+            color: #afafaf;
+            text-decoration: none;
+            position: relative;
+        }
+
+        a::after {
+            content: "";
             position: absolute;
-            border-radius: 100%;
-            width: 35vw;
-            height: 35vw;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-60%) rotate(-12deg);
+            bottom: 0;
+            left: 0;
+            width: 0;
+            border-bottom: 3px solid var(--yellow);
+            transition: width 400ms ease-in-out;
+        }
+
+        a:hover::after {
+            width: 100%;
         }
 
         h1 {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translateX(-50%) translateY(-50%) skew( -12deg) rotate(-12deg);
             font-family: 'Sarpanch', sans-serif;
             font-size: 10rem;
             margin: 0;
-            color: #1d9099;
-            text-shadow: 1vmin 1vmin 0 #E79C10, -1vmin -1vmin 0 #D53A33;
+            color: var(--blue);
+            text-shadow: 1vmin 1vmin 0 var(--yellow), -1vmin -1vmin 0 var(--red);
+            z-index: 5;
+        }
+
+        section {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            max-width: 100%; /* Because the scrollbar's width is included in 100vw -.- */
+            padding: 5rem 10rem;
+        }
+
+        section:not(#top) {
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            font-size: 2rem;
+        }
+
+        section:not(#top) h2{
+            text-align: center;
+            font-size: 4rem;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        section:not(#top) .hash{
+            color: var(--red);
+        }
+
+        #top img {
+            position: absolute;
+            border-radius: 100%;
+            width: 35vw;
+            height: 35vw;
+            top: 50vh;
+            left: 50vw;
+            animation: header-img-intro 2s ease 400ms both;
+            z-index: 1;
+        }
+        
+        #why .items {
+            width: 60vw;
+            list-style: none;
+            position: absolute;
+            margin: 0 auto;
+        }
+
+        #why .items .item::before {
+            content: "▶";
+            color: var(--blue);
+            margin: 0 1rem;
+        }
+
+        #why .fineprint {
+            font-size: 0.75rem;
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+        }
+
+        #vote a {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            padding: 1rem 3rem;
+            color: #fff;
+            background: var(--blue);
+            text-align: center;
+        }
+
+        #vote a.disabled {
+            cursor: not-allowed;
         }
 
         @media (max-width: 1150px) {
@@ -54,17 +158,54 @@
             html, body {
                 font-size: 8px;
             }
+
+            #why .items {
+                width: 80vw;
+            }
         }
 
         @media (max-width: 600px) {
             html, body {
                 font-size: 4px;
             }
+
+            #why .items {
+                width: 90vw;
+            }
+        }
+
+        @keyframes header-img-intro {
+            from {
+                transform: translateX(-50%) translateY(-50%) rotate(540deg) scale(0.0001);
+            }
+            to {
+                transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1);
+            }
         }
     </style>
 </head>
 <body>
-    <img src="./polar.jpg" />
     <h1>#Polar4Mod</h1>
+    <section id="top">
+        <img src="./polar.jpg" />
+        <a class="next-secttion"></a>
+    </section>
+    <section id="why">
+        <h2><span class="hash">#</span>Why Vote for Me?</h2>
+        <ul class="items">
+            <li class="item">Friendly, aways available* member of chat</li>
+            <li class="item">Fair management of channel points</li>
+            <li class="item">Regular, free Gift Subs</li>
+            <li class="item">Won't constantly abuse power</li>
+            <li class="item"><a href="https://isitagooddaytobearushmeadfan.com" target="_blank">IsItAGoodDayToBeARushmeadFan.com</a></li>
+        </ul>
+        <span class="fineprint">
+            * May not be always available
+        </span>
+    </section>
+    <section id="vote">
+        <h2><span class="hash">#</span>How Vote for Me</h2>
+        <a class="disabled">Rush needs to make this public still</a>
+    </section>
 </body>
 </html>
